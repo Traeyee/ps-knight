@@ -17,7 +17,7 @@ using Key = uint64_t;
 /*! \brief The maximal allowed key value */
 static const Key kMaxKey = std::numeric_limits<Key>::max();
 /** \brief node ID for the scheduler */
-static const int kScheduler = 1;
+static const int kScheduler = 1;  // 固定分给scheduler
 /**
  * \brief the server node group ID
  *
@@ -25,7 +25,7 @@ static const int kScheduler = 1;
  * - kServerGroup + kScheduler means all server nodes and the scheuduler
  * - kServerGroup + kWorkerGroup means all server and worker nodes
  */
-static const int kServerGroup = 2;
+static const int kServerGroup = 2;  // 与其它Group构成bitmap
 /** \brief the worker node group ID */
 static const int kWorkerGroup = 4;
 

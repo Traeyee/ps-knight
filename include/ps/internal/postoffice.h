@@ -62,6 +62,7 @@ class Postoffice {
    * group. otherwise, return {node_id}
    */
   const std::vector<int>& GetNodeIDs(int node_id) const {
+  // 返回该组所有成员
     const auto it = node_ids_.find(node_id);
     CHECK(it != node_ids_.cend()) << "node " << node_id << " doesn't exist";
     return it->second;
@@ -97,6 +98,7 @@ class Postoffice {
    * \param rank the worker rank
    */
   static inline int WorkerRankToID(int rank) {
+  // 9, 11, 13...  @traeyee
     return rank * 2 + 9;
   }
   /**
@@ -104,6 +106,7 @@ class Postoffice {
    * \param rank the server rank
    */
   static inline int ServerRankToID(int rank) {
+  // 8, 10, 12...  @traeyee
     return rank * 2 + 8;
   }
   /**
