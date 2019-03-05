@@ -1,34 +1,46 @@
 cc_binary(
-name = "ps",
-srcs = ["src/main.cpp"],
-deps = [":ps-lite"],
+  name="ps",
+  srcs=["src/main.cpp"],
+  deps=[
+  ":ps-lite",
+  "//cpputil/common:common",
+  ],
 )
 
 cc_library(
-name = "ps-lite",
-hdrs = glob([
-"include/**/*.h",
-"src/*.h",
-]),
-srcs = glob([
-"include/**/*.cc",
-"src/*.cc"
-]),
-deps = [
-":cc_meta_proto",
-"//cpp3rdlib/libzmq:libzmq",
-],
-includes = ["include", "src", "deps/include"],
+  name="ps-lite",
+  hdrs=glob([
+    "include/**/*.h",
+    "src/*.h",
+    ]),
+  srcs=glob([
+    "include/**/*.cc",
+    "src/*.cc"
+    ]),
+  deps=[
+    ":cc_meta_proto",
+    "//cpp3rdlib/libzmq:libzmq",
+    ],
+  includes=["include", "src", "deps/include"],
 )
 
 cc_proto_library(
-name = "cc_meta_proto",
-deps = [
-":meta_proto",
-]
+  name="cc_meta_proto",
+  deps=[
+    ":meta_proto",
+  ]
 )
 
 proto_library(
-name = "meta_proto",
-srcs = ["src/meta.proto"],
+  name="meta_proto",
+  srcs=["src/meta.proto"],
+)
+
+cc_library(
+  name="utils",
+  hdrs=["include/utils/conf.h"],
+  srcs=["include/utils/conf.cpp"],
+  deps=[
+    "//cpp3rdlib/boost/include:boost",
+  ],
 )

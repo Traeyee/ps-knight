@@ -245,9 +245,10 @@ void Van::Start(int customer_id) {
   start_mu_.lock();
 
   if (init_stage == 0) {
+  // 找scheduler_
     scheduler_.hostname = std::string(CHECK_NOTNULL(Environment::Get()->find("DMLC_PS_ROOT_URI")));
     scheduler_.port = atoi(CHECK_NOTNULL(Environment::Get()->find("DMLC_PS_ROOT_PORT")));
-    scheduler_.role = Node::SCHEDULER;
+    scheduler_.role = Node::SCHEDULER;  // 默认值为SCHEDULER
     scheduler_.id = kScheduler;
     is_scheduler_ = Postoffice::Get()->is_scheduler();
 
@@ -259,11 +260,15 @@ void Van::Start(int customer_id) {
                   (Postoffice::Get()->is_worker() ? Node::WORKER : Node::SERVER);
       const char *nhost = Environment::Get()->find("DMLC_NODE_HOST");
       std::string ip;
-      if (nhost) ip = std::string(nhost);
+      if (nhost) {
+          ip = std::string(nhost);
+      }
       if (ip.empty()) {
         const char *itf = Environment::Get()->find("DMLC_INTERFACE");
         std::string interface;
-        if (itf) interface = std::string(itf);
+        if (itf) {
+            interface = std::string(itf)
+        };
         if (interface.size()) {
           GetIP(interface, &ip);
         } else {
